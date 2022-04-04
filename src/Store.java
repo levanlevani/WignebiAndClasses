@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Store {
 
-                                private ArrayList<Book> bookList = new ArrayList<Book>();
+  private ArrayList<Book> bookList = new ArrayList<Book>();
 
   private String name;
 
