@@ -53,15 +53,17 @@ public class Store {
    }
   }
 
-  public void printBooks () {
-    for (int i = 0; i < bookList.size(); i++) {
-      System.out.println("სათაური: " + bookList.get(i).getTitle());
-      System.out.println("ფასი: " + getPrice(i) + bookList.get(i).valuta);
-      System.out.println("რაოდენობა: " + bookList.get(i).raodenoba);
-      System.out.println();
-    }
-
-  }
+//region printbooks
+//  public void printBooks () {
+//    for (int i = 0; i < bookList.size(); i++) {
+//      System.out.println("სათაური: " + bookList.get(i).getTitle());
+//      System.out.println("ფასი: " + getPrice(i) + bookList.get(i).valuta);
+//      System.out.println("რაოდენობა: " + bookList.get(i).raodenoba);
+//      System.out.println();
+//    }
+//
+//  }
+//endregion
 
   @Override
   public boolean equals(Object obj) {
