@@ -1,8 +1,15 @@
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Store {
 
-  private ArrayList<BookWithProperties> bookList = new ArrayList<BookWithProperties>();
+  private HashSet<BookWithProperties> bookSet = new HashSet<BookWithProperties>();
+
+  public HashSet<Book> getDasamatebeliSakaifoWignebi() {
+    return dasamatebeliSakaifoWignebi;
+  }
+
+  private HashSet<Book> dasamatebeliSakaifoWignebi = new HashSet<>();
+  //private HashSet<BookWithProperties> bookSet = new HashSet<>();
 
   private String name;
 
@@ -16,13 +23,12 @@ public class Store {
 
   public void addBookToList(Book book, int quantity, double price, Currency currency) {
     int t = 0;
+
     BookWithProperties b = new BookWithProperties(book, quantity, price, currency);
 
-    var foundBook = siaSheicavsWigns(book);
+    var foundBook = ipoveWigni(book);
 
-    if (foundBook == null) {
-      bookList.add(b);
-    } else {
+    if (foundBook != null) {
       if (foundBook.getPrice() != price) {
         throw new IllegalArgumentException("წიგნი " + foundBook.getBook() + " მარტო " + foundBook.getPrice() +
           " " + foundBook.getCurrency() + " ფასში გვაქვს!");
@@ -30,6 +36,8 @@ public class Store {
 
       foundBook.setQuantity(foundBook.getQuantity() + quantity);
     }
+
+    bookSet.add(b);
 
     //    for (int i = 0; i < 5; i++) {
 //      if (bookList.get(i).getBook().getTitle().equals(book.getTitle())) {
@@ -44,14 +52,44 @@ public class Store {
 //    }
   }
 
-  private BookWithProperties siaSheicavsWigns(Book book) {
+  private BookWithProperties ipoveWigni(Book book) {
     BookWithProperties ret = null;
 
-    for (BookWithProperties b: bookList) {
+    for (BookWithProperties b : bookSet) {
       if (b.getBook().equals(book)) {
         ret = b;
         break;
       }
+    }
+
+    return ret;
+  }
+
+  public boolean gaiyida(Book book, int quantity) {
+
+    if (quantity <= 0) {
+      throw new IllegalArgumentException("დადებითი რაოდენობა გადმოეცი არამზადავ!");
+    }
+
+    boolean ret = false;
+    BookWithProperties napovniWigni = ipoveWigni(book);
+
+    if (napovniWigni != null) {
+      var ramdeniCaliGvaqvs = napovniWigni.getQuantity();
+
+      if (ramdeniCaliGvaqvs < quantity) {
+        throw new IllegalArgumentException("მარტო " + ramdeniCaliGvaqvs + " გვაქვს");
+      } else if (ramdeniCaliGvaqvs == quantity) {
+        bookSet.remove(napovniWigni);
+        ret = true;
+      } else {
+        napovniWigni.setQuantity(ramdeniCaliGvaqvs - quantity);
+        ret = true;
+      }
+    }
+    else {
+      dasamatebeliSakaifoWignebi.add(book);
+      ret = false;
     }
 
     return ret;
@@ -64,10 +102,10 @@ public class Store {
 
   //region printbooks
   public void printBooks() {
-    for (int i = 0; i < bookList.size(); i++) {
-      System.out.println("სათაური: " + bookList.get(i).getBook().getTitle());
-      System.out.println("ფასი: " + bookList.get(i).getPrice() + " " + bookList.get(i).getCurrency());
-      System.out.println("რაოდენობა: " + bookList.get(i).getQuantity());
+    for (BookWithProperties b : bookSet) {
+      System.out.println("სათაური: " + b.getBook().getTitle());
+      System.out.println("ფასი: " + b.getPrice() + " " + b.getCurrency());
+      System.out.println("რაოდენობა: " + b.getQuantity());
       System.out.println();
     }
 
