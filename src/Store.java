@@ -2,13 +2,9 @@ import java.util.ArrayList;
 
 public class Store {
 
-  private ArrayList<Book> bookList = new ArrayList<Book>();
+  private ArrayList<BookWithProperties> bookList = new ArrayList<BookWithProperties>();
 
   private String name;
-
-  private double price;
-  private Currency currency;
-  private int quantity;
 
   public Store(String name) {
     this.name = name;
@@ -17,52 +13,65 @@ public class Store {
   public String getName() {
     return name;
   }
-  public double getPrice(Book book) {
-    if (bookList.contains(book))
-      return getPrice(book);
-    return price;
-  }
-  public Currency getCurrency() {
-    return currency;
-  }
-  public int getQuantity() {
-    return quantity;
-  }
 
-  public void setPrice(double price) {
-    this.price = price;
-  }
-  public void setCurrency(Currency currency) {
-    this.currency = currency;
-  }
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
+  public void addBookToList(Book book, int quantity, double price, Currency currency) {
+    int t = 0;
+    BookWithProperties b = new BookWithProperties(book, quantity, price, currency);
 
+    var foundBook = siaSheicavsWigns(book);
 
-  public void addBook(Book book, double price, Currency currency, int quantity) {
-    bookList.add(book);
-    setPrice(price);
-    setCurrency(currency);
-    setQuantity(quantity);
-  }
+    if (foundBook == null) {
+      bookList.add(b);
+    } else {
+      if (foundBook.getPrice() != price) {
+        throw new IllegalArgumentException("წიგნი " + foundBook.getBook() + " მარტო " + foundBook.getPrice() +
+          " " + foundBook.getCurrency() + " ფასში გვაქვს!");
+      }
 
-  public void removeBook(Book book, int quantity) {
-   if (bookList.contains(book)) {
-     bookList.remove(book);
-   }
-  }
+      foundBook.setQuantity(foundBook.getQuantity() + quantity);
+    }
 
-//region printbooks
-//  public void printBooks () {
-//    for (int i = 0; i < bookList.size(); i++) {
-//      System.out.println("სათაური: " + bookList.get(i).getTitle());
-//      System.out.println("ფასი: " + getPrice(i) + bookList.get(i).valuta);
-//      System.out.println("რაოდენობა: " + bookList.get(i).raodenoba);
-//      System.out.println();
+    //    for (int i = 0; i < 5; i++) {
+//      if (bookList.get(i).getBook().getTitle().equals(book.getTitle())) {
+//        t++;
+//        bookList.get(i).setQuantity(bookList.get(i).getQuantity() + quantity);
+//        break;
+//      }
 //    }
+//    if (t != 0) {
 //
-//  }
+//      bookList.add(b);
+//    }
+  }
+
+  private BookWithProperties siaSheicavsWigns(Book book) {
+    BookWithProperties ret = null;
+
+    for (BookWithProperties b: bookList) {
+      if (b.getBook().equals(book)) {
+        ret = b;
+        break;
+      }
+    }
+
+    return ret;
+  }
+
+  public void findBook() {
+
+  }
+
+
+  //region printbooks
+  public void printBooks() {
+    for (int i = 0; i < bookList.size(); i++) {
+      System.out.println("სათაური: " + bookList.get(i).getBook().getTitle());
+      System.out.println("ფასი: " + bookList.get(i).getPrice() + " " + bookList.get(i).getCurrency());
+      System.out.println("რაოდენობა: " + bookList.get(i).getQuantity());
+      System.out.println();
+    }
+
+  }
 //endregion
 
   @Override

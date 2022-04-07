@@ -3,16 +3,46 @@ public class Main {
   public static void main(String[] args) {
 
 
+//    Book ვეფხისტყაოსანი = new Book("ვეფხისტყაოსანი", Author.Astrid_Lindgren, Language.SWE,
+//      232, 1200, isTranslation.Originali, "არ ყავს", Publisher.sulakauri);
+//
 
-    Book ჯაყო = new Book("ჯაყოს ხიზნები", Author.Mikheil_Javakhishvili, Genre.novel,
-      Language.GEO, 452, 1925,
+        Book ჯაყო = new Book("ჯაყოს ხიზნები", Author.Mikheil_Javakhishvili, Genre.novel,
+     Language.GEO, 452, 1925,
+       isTranslation.Originali, "NO", Publisher.diogene);
+
+
+       Book კარლსონი = new Book("ბიჭუნა და სახურავის ბინადარი კარლსონი", Author.Astrid_Lindgren, Genre.story,
+         Language.SWE, 124, 1955,
+      isTranslation.Targmani, "ვიღაცა ვიღაციშვილი", Publisher.sulakauri);
+
+
+
+       Book ჯაყო2 = new Book("ჯაყოს მიზნები", Author.Mikheil_Javakhishvili, Genre.story, Language.GEO,
+         452, 2030,
       isTranslation.Originali, "NO", Publisher.diogene);
 
-    Store კაიმაღაზია = new Store("კაი მაღაზია");
-    კაიმაღაზია.addBook(ჯაყო,200,Currency.GEL,3);
+       Store ახალიმაღაზია = new Store("ახალი მაღაზია");
+       ახალიმაღაზია.addBookToList(ჯაყო,2,300,Currency.GEL);
+       ახალიმაღაზია.addBookToList(კარლსონი,23,0.2,Currency.GEL);
+       ახალიმაღაზია.addBookToList(ჯაყო,3,300,Currency.GEL);
+
+       ახალიმაღაზია.printBooks();
+
+//
+//    Store კაიმაღაზია = new Store("კაი მაღაზია");
+//    კაიმაღაზია.addBook(ჯაყო, 2,200,Currency.GEL);
+//
+//
+//
+//    კაიმაღაზია.addBook(ჯაყო,3,300,Currency.GEL);
+//    კაიმაღაზია.printBooks();
+
+//    Store კაიმაღაზია = new Store("კაი მაღაზია");
+//    კაიმაღაზია.addBook(ჯაყო,200,Currency.GEL,3);
 
 
-     //region ძველი წიგნები (დაკომენტარებული)
+    //region ძველი წიგნები (დაკომენტარებული)
 //    Book კარლსონი = new Book("ბიჭუნა და სახურავის ბინადარი კარლსონი", Author.Astrid_Lindgren, Genre.motkhroba, "შვედური", 124, 1955,
 //      isTranslation.Targmani, "ვიღაცა ვიღაციშვილი", Publisher.sulakauri);
 //

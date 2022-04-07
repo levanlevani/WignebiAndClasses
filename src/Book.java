@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Book {
 
 
@@ -99,8 +101,6 @@ public class Book {
     this.publisher = publisher;
   }
 
-  //endregion
-
   @Override
   public boolean equals(Object obj) {
     if (!(obj instanceof Book)) {
@@ -110,8 +110,18 @@ public class Book {
     Book w = (Book) obj;
 
     return
-      this.title.equals(w.title) && this.author.equals(w.author);
+      this.title.equals(w.title) && this.author.equals(w.author)
+      && this.pages == w.pages && this.language.equals(w.language)
+      && this.genre.equals(w.genre) && this.isTranslation.equals(w.isTranslation)
+      && this.year == w.year;
+  }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.title,this.author,this.pages, this.language, this.genre,
+      this.isTranslation,this.year,this.publisher,this.translator);
+
+    //return super.hashCode();
   }
 }
 
