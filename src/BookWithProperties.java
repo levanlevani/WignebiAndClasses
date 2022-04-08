@@ -50,16 +50,16 @@ public class BookWithProperties {
     BookWithProperties w = (BookWithProperties) obj;
 
     return
-     this.book.getTitle().equals(w.book.getTitle()) && this.book.getAvtori().equals(w.getBook().getAvtori())
+     this.book.getTitle().equals(w.book.getTitle()) && this.book.getAuthor().equals(w.getBook().getAuthor())
         && this.book.getPages() == w.book.getPages() && this.book.getLanguage().equals(w.getBook().getLanguage())
-        && this.book.getJanri().equals(w.getBook().getJanri()) && this.book.getIsTranslation().equals(w.book.getIsTranslation())
+        && this.book.getGenre().equals(w.getBook().getGenre())
         && this.book.getYear() == w.book.getYear();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.book.getTitle(),this.book.getAvtori(),this.book.getPages(), this.book.getLanguage(),
-      this.book.getJanri(), this.book.getIsTranslation(), this.book.getGamomcemloba(), this.book.getTranslator());
+    return Objects.hash(this.book.getTitle(),this.book.getAuthor(),this.book.getPages(), this.book.getLanguage(),
+      this.book.getGenre(), this.book.getPublisher());
 
     //return super.hashCode();
   }

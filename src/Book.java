@@ -10,13 +10,13 @@ public class Book {
   private Language language;
   private int pages;
   private int year;
-  private isTranslation isTranslation;
-  private String translator;
+  private boolean isTranslation;
   private Publisher publisher;
+  private TranslationProperties translationProperties;
 //endregion
 
-  public Book(String title, Author author, Genre genre, Language language, int pages, int year,
-              isTranslation isTranslation, String translator, Publisher publisher) {
+  public Book(String title, Author author, Genre genre, Language language, int pages, int year, boolean isTranslation,
+              TranslationProperties translationProperties, Publisher publisher) {
     this.title = title;
     this.author = author;
     this.genre = genre;
@@ -24,11 +24,33 @@ public class Book {
     this.pages = pages;
     this.year = year;
     this.isTranslation = isTranslation;
-    this.translator = translator;
     this.publisher = publisher;
+    this.translationProperties = translationProperties;
+
+    if (!isTranslation) {                                   //TODO ??????????????????????????
+      translationProperties = null;
+    }
   }
 
   //region getters and setters
+
+
+  public boolean isTranslation() {
+    return isTranslation;
+  }
+
+  public void setTranslation(boolean translation) {
+    isTranslation = translation;
+  }
+
+  public TranslationProperties getTranslationProperties() {
+    return translationProperties;
+  }
+
+  public void setTranslationProperties(TranslationProperties translationProperties) {
+    this.translationProperties = translationProperties;
+  }
+
   public String getTitle() {
     return title;
   }
@@ -37,19 +59,19 @@ public class Book {
     this.title = title;
   }
 
-  public Author getAvtori() {
+  public Author getAuthor() {
     return author;
   }
 
-  public void setAvtori(Author author) {
+  public void setAuthor(Author author) {
     this.author = author;
   }
 
-  public Genre getJanri() {
+  public Genre getGenre() {
     return genre;
   }
 
-  public void setJanri(Genre genre) {
+  public void setGenre(Genre genre) {
     this.genre = genre;
   }
 
@@ -77,30 +99,15 @@ public class Book {
     this.year = year;
   }
 
-  public isTranslation getIsTranslation() {
-    return isTranslation;
-  }
 
-  public void setIsTranslation(isTranslation isTranslation) {
-    this.isTranslation = isTranslation;
-  }
-
-  public String getTranslator() {
-    return translator;
-  }
-
-  public void setTranslator(String translator) {
-    this.translator = translator;
-  }
-
-  public Publisher getGamomcemloba() {
+  public Publisher getPublisher() {
     return publisher;
   }
 
-  public void setGamomcemloba(Publisher publisher) {
+  public void setPublisher(Publisher publisher) {
     this.publisher = publisher;
   }
-
+//endregion
   @Override
   public boolean equals(Object obj) {
     if (!(obj instanceof Book)) {
@@ -112,14 +119,13 @@ public class Book {
     return
       this.title.equals(w.title) && this.author.equals(w.author)
       && this.pages == w.pages && this.language.equals(w.language)
-      && this.genre.equals(w.genre) && this.isTranslation.equals(w.isTranslation)
-      && this.year == w.year;
+      && this.genre.equals(w.genre)  && this.year == w.year;
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(this.title,this.author,this.pages, this.language, this.genre,
-      this.isTranslation,this.year,this.publisher,this.translator);
+      this.isTranslation,this.year,this.publisher);
 
     //return super.hashCode();
   }

@@ -1,7 +1,8 @@
 public enum Language {
   GEO("ქართული"),
   ENG("ინგლისური"),
-  SWE("შვედური");
+  SWE("შვედური"),
+  GER("გერმანული");
 
   private String inGeorgian;
 
